@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Challenge Chapter 8 - OpenAPI 3.0",
+    "title": "Challenge Chapter 8",
     "description": "This is a sample RESTful API from Challenge Chapter 8 Server based on the OpenAPI 3.0 specification.",
     "contact": {
       "email": "septianm028@gmail.com"
@@ -40,15 +40,6 @@
                 }
               }
             }
-          },
-          "400": {
-            "description": "Invalid parameter"
-          },
-          "404": {
-            "description": "List player not found"
-          },
-          "405": {
-            "description": "Validation exception"
           }
         }
       },
@@ -79,11 +70,289 @@
               }
             }
           },
-          "405": {
-            "description": "Invalid input"
+          "400": {
+            "description": "Player not found!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "username or email or password cannot be empty"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
+    },
+    "/players/{playerId}": {
+      "get": {
+        "tags": ["player"],
+        "summary": "Find player by ID in database",
+        "description": "Return a single player",
+        "operationId": "getPlayerById",
+        "parameters": [
+          {
+            "name": "playerId",
+            "in": "path",
+            "description": "ID of player to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "players.json#/GetPlayerById"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Player not found!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "Not found"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Player with 3 not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["player"],
+        "summary": "Update player",
+        "description": "Update an existent user in the game",
+        "operationId": "updateUser",
+        "parameters": [
+          {
+            "name": "playerId",
+            "in": "path",
+            "description": "ID of player that need to be updated",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update an existent player in the game",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "players.json#/PostPlayer"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Player with id: 3 successfully updated"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Player not found!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Failed to update"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["player"],
+        "summary": "Delete player",
+        "description": "Delete a user from game database",
+        "operationId": "deleteUser",
+        "parameters": [
+          {
+            "name": "playerId",
+            "in": "path",
+            "description": "The name that needs to be deleted",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Player with id: 5, was deleted successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Player not found!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Cannot delete Player with id=3. Maybe Player was not found!"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/players/exp/{playerId}": {
+      "post": {
+        "tags": ["player"],
+        "summary": "Update experience player",
+        "description": "Update experience an existent user in the game",
+        "operationId": "updateExpUser",
+        "parameters": [
+          {
+            "name": "playerId",
+            "in": "path",
+            "description": "ID of player that need to be updated",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update experience an existent player in the game",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "exp": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 100000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Player with id = 3 gain 100000 experience. Total experience = 100000"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Player not found!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Cannot update Player with id=3!"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "GetPlayer": { "$ref": "players.json#/GetPlayer" },
+      "PostPlayer": { "$ref": "players.json#/PostPlayer" },
+      "NewPlayer": { "$ref": "players.json#/NewPlayer" },
+      "GetPlayerById": { "$ref": "players.json#/GetPlayerById" }
     }
   }
 }

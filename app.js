@@ -23,6 +23,8 @@ app.use("/api-docs", docsRouter);
 
 const options = {
   explorer: false,
+  customCss: ".swagger-ui .topbar { display: none }",
+  customSiteTitle: "Challenge Chapter 8 - API Documentation",
   swaggerOptions: {
     urls: [
       {

@@ -1,47 +1,56 @@
 {
   "GetPlayer": {
-    "type": "array",
-    "items": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64",
-          "example": 1
-        },
-        "username": {
-          "type": "string",
-          "example": "PussySlayer613"
-        },
-        "email": {
-          "type": "string",
-          "format": "email",
-          "example": "pussy.slay3r@gmail.com"
-        },
-        "password": {
-          "type": "string",
-          "format": "password",
-          "example": "$2b$10$ZXjFAKlNstk5h85wcZ1Wvu81HuC48Bg7Kg.4bS4T9d7SFgufwALwy"
-        },
-        "experience": {
-          "type": "integer",
-          "format": "int64",
-          "example": 600000
-        },
-        "lvl": {
-          "type": "integer",
-          "format": "int64",
-          "example": 600
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "example": "2022-09-03T03:22:27.917Z"
-        },
-        "updatedAt": {
-          "type": "string",
-          "format": "date-time",
-          "example": "2022-09-03T03:22:27.917Z"
+    "type": "object",
+    "properties": {
+      "result": {
+        "type": "string",
+        "example": "Success"
+      },
+      "data": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int64",
+              "example": 1
+            },
+            "username": {
+              "type": "string",
+              "example": "PussySlayer613"
+            },
+            "email": {
+              "type": "string",
+              "format": "email",
+              "example": "pussy.slay3r@gmail.com"
+            },
+            "password": {
+              "type": "string",
+              "format": "password",
+              "example": "$2b$10$ZXjFAKlNstk5h85wcZ1Wvu81HuC48Bg7Kg.4bS4T9d7SFgufwALwy"
+            },
+            "experience": {
+              "type": "integer",
+              "format": "int64",
+              "example": 600000
+            },
+            "lvl": {
+              "type": "integer",
+              "format": "int64",
+              "example": 600
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2022-09-03T03:22:27.917Z"
+            },
+            "updatedAt": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2022-09-03T03:22:27.917Z"
+            }
+          }
         }
       }
     }
@@ -104,6 +113,59 @@
             "type": "integer",
             "format": "int64",
             "example": 0
+          },
+          "lvl": {
+            "type": "integer",
+            "format": "int64",
+            "example": 600
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2022-09-03T03:22:27.917Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2022-09-03T03:22:27.917Z"
+          }
+        }
+      }
+    }
+  },
+  "GetPlayerById": {
+    "type": "object",
+    "properties": {
+      "result": {
+        "type": "string",
+        "example": "Success"
+      },
+      "data": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 1
+          },
+          "username": {
+            "type": "string",
+            "example": "PussySlayer613"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "pussy.slay3r@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "example": "$2b$10$ZXjFAKlNstk5h85wcZ1Wvu81HuC48Bg7Kg.4bS4T9d7SFgufwALwy"
+          },
+          "experience": {
+            "type": "integer",
+            "format": "int64",
+            "example": 600000
           },
           "lvl": {
             "type": "integer",
