@@ -1,0 +1,89 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Challenge Chapter 8 - OpenAPI 3.0",
+    "description": "This is a sample RESTful API from Challenge Chapter 8 Server based on the OpenAPI 3.0 specification.",
+    "contact": {
+      "email": "septianm028@gmail.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/tianbuyung/binar-bootcamp-challenge-chapter-8"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:4000/api/v1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "player",
+      "description": "All operations about players."
+    }
+  ],
+  "paths": {
+    "/players": {
+      "get": {
+        "tags": ["player"],
+        "summary": "Get all players list in game",
+        "description": "Get all players list in game",
+        "operationId": "getPlayer",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "players.json#/GetPlayer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameter"
+          },
+          "404": {
+            "description": "List player not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "post": {
+        "tags": ["player"],
+        "summary": "Create new player in game",
+        "description": "Create new player in game",
+        "operationId": "createPlayer",
+        "requestBody": {
+          "description": "Create a new player in game",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "players.json#/PostPlayer"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "players.json#/NewPlayer"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}
