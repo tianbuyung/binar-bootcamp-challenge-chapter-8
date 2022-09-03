@@ -135,3 +135,4 @@ dist
 # build files
 build/*
 dist/*
+openapi.json
