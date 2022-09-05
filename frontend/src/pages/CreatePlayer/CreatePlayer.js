@@ -17,7 +17,7 @@ const styleCentered = {
 const LEVEL_BAR = 1000;
 
 const CreatePlayer = (props) => {
-  const { setPlayer } = props;
+  const { setPlayer, setValueTab } = props;
 
   const [inputs, setInputs] = useState({
     username: "",
@@ -48,8 +48,9 @@ const CreatePlayer = (props) => {
       updatedAt: new Date(),
     };
     players.push(newPlayer);
-    localStorage.setItem("players", JSON.stringify(players));
     setPlayer(players);
+    localStorage.setItem("players", JSON.stringify(players));
+    setValueTab(0);
   };
 
   return (

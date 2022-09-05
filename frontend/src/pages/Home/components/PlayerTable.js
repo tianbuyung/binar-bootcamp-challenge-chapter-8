@@ -8,10 +8,21 @@ import {
   TableRow,
 } from "@mui/material";
 import PersonRemoveAlt1Icon from "@mui/icons-material/PersonRemoveAlt1";
-import EditIcon from "@mui/icons-material/Edit";
+import UpdatePlayer from "./UpdatePlayer";
 
 const PlayerTable = (props) => {
   const players = props.players;
+  const setPlayer = props.setPlayer;
+
+  const getPlayers = JSON.parse(localStorage.getItem("players"));
+
+  const handleDelete = (id) => {
+    const player = players.filter((item) => {
+      return item.id !== id;
+    });
+    setPlayer(player);
+    localStorage.setItem("players", JSON.stringify(player));
+  };
 
   return (
     <TableContainer component={Paper}>
@@ -27,7 +38,7 @@ const PlayerTable = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {players.map((player) => {
+          {getPlayers.map((player) => {
             const { id, username, email, experience, lvl } = player;
             return (
               <TableRow
@@ -41,9 +52,16 @@ const PlayerTable = (props) => {
                 <TableCell align="left">{email}</TableCell>
                 <TableCell align="center">{experience}</TableCell>
                 <TableCell align="center">{lvl}</TableCell>
-                <TableCell align="center">
-                  <EditIcon /> {"   |   "}
-                  <PersonRemoveAlt1Icon />
+                <TableCell
+                  align="center"
+                  style={{ display: "flex", justifyContent: "center" }}
+                >
+                  <UpdatePlayer player={player} setPlayer={setPlayer} />
+                  |
+                  <PersonRemoveAlt1Icon
+                    style={{ cursor: "pointer", marginLeft: "0.5rem" }}
+                    onClick={() => handleDelete(id)}
+                  />
                 </TableCell>
               </TableRow>
             );

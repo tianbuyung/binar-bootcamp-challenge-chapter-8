@@ -46,25 +46,25 @@ function a11yProps(index) {
 
 const TabsMenu = (props) => {
   const { players, setPlayer } = props.payload;
-  const [value, setValue] = useState(0);
+  const [valueTab, setValueTab] = useState(0);
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    setValueTab(newValue);
   };
 
   return (
     <Box sx={{ width: "100%" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs value={value} onChange={handleChange}>
+        <Tabs value={valueTab} onChange={handleChange}>
           <Tab label={<HomeIcon />} {...a11yProps(0)} />
           <Tab label={<PersonAddAlt1Icon />} {...a11yProps(1)} />
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0}>
-        <Home players={players} />
+      <TabPanel value={valueTab} index={0}>
+        <Home players={players} setPlayer={setPlayer} />
       </TabPanel>
-      <TabPanel value={value} index={1}>
-        <CreatePlayer setPlayer={setPlayer} />
+      <TabPanel value={valueTab} index={1}>
+        <CreatePlayer setPlayer={setPlayer} setValueTab={setValueTab} />
       </TabPanel>
     </Box>
   );
