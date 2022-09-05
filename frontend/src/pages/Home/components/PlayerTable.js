@@ -1,4 +1,5 @@
 import {
+  Divider,
   Paper,
   Table,
   TableBody,
@@ -13,8 +14,6 @@ import UpdatePlayer from "./UpdatePlayer";
 const PlayerTable = (props) => {
   const players = props.players;
   const setPlayer = props.setPlayer;
-
-  const getPlayers = JSON.parse(localStorage.getItem("players"));
 
   const handleDelete = (id) => {
     const player = players.filter((item) => {
@@ -38,7 +37,7 @@ const PlayerTable = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {getPlayers.map((player) => {
+          {players.map((player) => {
             const { id, username, email, experience, lvl } = player;
             return (
               <TableRow
@@ -57,7 +56,7 @@ const PlayerTable = (props) => {
                   style={{ display: "flex", justifyContent: "center" }}
                 >
                   <UpdatePlayer player={player} setPlayer={setPlayer} />
-                  |
+                  <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
                   <PersonRemoveAlt1Icon
                     style={{ cursor: "pointer", marginLeft: "0.5rem" }}
                     onClick={() => handleDelete(id)}

@@ -9,6 +9,7 @@ import {
   TextField,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import { levelCalc } from "../../../utils/levelCalculation";
 
 const style = {
   position: "absolute",
@@ -27,8 +28,6 @@ const styleCentered = {
   display: "flex",
   justifyContent: "center",
 };
-
-const LEVEL_BAR = 1000;
 
 export default function UpdatePlayer(props) {
   const { player, setPlayer } = props;
@@ -58,7 +57,7 @@ export default function UpdatePlayer(props) {
     e.preventDefault();
     let { username, email, password, experience } = inputs;
     experience = experience ? experience : 0;
-    const lvl = Math.floor(experience / LEVEL_BAR);
+    const lvl = levelCalc(experience);
     const editPlayer = {
       ...inputs,
       username,
