@@ -7,14 +7,13 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { levelCalc } from "../../utils/levelCalculation";
 import "./CreatePlayer.css";
 
 const styleCentered = {
   display: "flex",
   justifyContent: "center",
 };
-
-const LEVEL_BAR = 1000;
 
 const CreatePlayer = (props) => {
   const { setPlayer, setValueTab } = props;
@@ -38,7 +37,7 @@ const CreatePlayer = (props) => {
     let { experience } = inputs;
     const players = JSON.parse(localStorage.getItem("players"));
     experience = experience ? experience : 0;
-    const lvl = Math.floor(experience / LEVEL_BAR);
+    const lvl = levelCalc(experience);
     const newPlayer = {
       ...inputs,
       id: players.length + 1,
